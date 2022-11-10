@@ -34,9 +34,9 @@ as shown below:
 
 #### Example App
  
- From the `App.js` component file I created a messaging example app, used for testing the [react native thread](https://github.com/joltup/react-native-threads#android-1) which works pretty well. I also created a fibonacci example function, which is an expensive calculation for testing this library.  Using this library for this calculation does not work pretty well as a result.
+ From the `App.js` component file I created a messaging example app, used for testing the [react native thread](https://github.com/joltup/react-native-threads#android-1) which works pretty well. I also created a fibonacci example function, which is an expensive calculation for testing this library.  Using this library for this calculation does not work pretty because, a worker thread is only started after the main RN thread is running, making this a slow process as it happens in serial.
 
-I installed [react native multi threading](https://github.com/mrousavy/react-native-multithreading) package, which supports [JSI](https://github.com/react-native-community/discussions-and-proposals/issues/91).
+To solve this problem, I installed [react native multi threading](https://github.com/mrousavy/react-native-multithreading) package, which supports [JSI](https://github.com/react-native-community/discussions-and-proposals/issues/91).
 Since [JSI](https://github.com/react-native-community/discussions-and-proposals/issues/91) is becoming more mainstream, there might be functions that are actually blocking and take a while to execute. For example, a storage library like [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) or fibonacci recursive function might take a few milliseconds to execute a complex call. Since the whole idea is to avoid our entire RN thread to freeze when doing that, since users will perceive a noticeable lag or freeze.
 
 This package simply off-load such expensive calculations/blocking calls to a separate thread with almost no overhead while the main RN thread can concentrate on running our app's business logic, respond to user input, update state and more. 
