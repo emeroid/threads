@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput} from 'react-native';
 import { useThread } from './hooks/useThread';
-import {spawnThread} from 'react-native-multithreading';
+import { spawnThread } from 'react-native-multithreading';
 
 export default function App() {
 
